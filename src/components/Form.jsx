@@ -29,6 +29,7 @@ const userAtom = createAtom(
   }
 )
 
+/*
 const nameAtom = createAtom(
   { setName: (value) => value },
   ({onAction, schedule}, state = "") => {
@@ -54,6 +55,7 @@ const ageAtom = createAtom(
     return state
   }
 )
+*/
 
 function Form() {
   /*
