@@ -9,6 +9,26 @@ const nameAtom = declareAtom("", on => {
 })
 */
 
+let userInitialState = {
+  name: '',
+  age: 0
+} 
+
+const userAtom = createAtom(
+  { setName: (value) => (value), setAge: (value) => (value) },
+  ({onAction}, state = userInitialState) => {
+    onAction("setName", (payload) => {
+      state = {...state, name: payload}
+    })
+
+    onAction("setAge", (payload) => {
+      state = {...state, age: payload}
+    })
+
+    return state
+  }
+)
+
 const nameAtom = createAtom(
   { setName: (value) => value },
   ({onAction, schedule}, state = "") => {
@@ -36,8 +56,18 @@ const ageAtom = createAtom(
 )
 
 function Form() {
+  /*
   const [name, {setName}] = useAtom(nameAtom)
   const [age, {setAge}] = useAtom(ageAtom)
+
+  const handleSetName = useAction(e => setName(e.target.value)) 
+  const handleSetAge = useAction(e => setAge(e.target.value))
+  */
+
+  const [{name, age}, {setName, setAge}] = useAtom(userAtom)
+
+  console.log(name)
+  console.log(age)
 
   const handleSetName = useAction(e => setName(e.target.value)) 
   const handleSetAge = useAction(e => setAge(e.target.value))
